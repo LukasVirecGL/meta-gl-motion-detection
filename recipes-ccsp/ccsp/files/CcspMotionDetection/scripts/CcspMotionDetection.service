@@ -1,0 +1,15 @@
+[Unit]
+Description=Wi-Fi Motion Detection service
+After=ccspwifiagent.service
+
+[Service]
+Type=forking
+WorkingDirectory=/usr/ccsp/motion_detection
+Environment="Subsys=eRT."
+Environment="LOG4C_RCPATH=/etc"
+EnvironmentFile=/etc/device.properties
+ExecStart=/usr/bin/motion_detection -subsys $Subsys
+StandardOutput=syslog+console
+
+[Install]
+WantedBy=default.target
